@@ -16,13 +16,13 @@ from my_app.serializers.player import PlayerSerializer
 def get_player_list_handler(request: Request):
 
     player = Player.objects.all()
-    if (len(list(player))==0):
+    if len(list(player)) == 0:
         response = ''
-    elif (len(list(player))==1):
-        serializer = PlayerSerializer(Player)
+    elif len(list(player)) == 1:
+        serializer = PlayerSerializer(player)
         response = serializer.data
     else:
-        serializer = PlayerSerializer(Player, many=True)  # many = true is to say allow multiple data
+        serializer = PlayerSerializer(player, many=True)  # many = true is to say allow multiple data
         response = serializer.data
 
     return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)

@@ -23,7 +23,7 @@ class PlayerSerializer(serializers.ModelSerializer):
         player = Player.objects.create(**validated_data)
         for playerSkill in playerSkills:
             # playerID is our foreign key
-            PlayerSkill.objects.create(**playerSkill, playerID=player)
+            PlayerSkill.objects.create(**playerSkill, player=player)
         return player
 
     def update(self, instance, validated_data):
@@ -38,15 +38,15 @@ class PlayerSerializer(serializers.ModelSerializer):
         # if we do not pass a name we just put the instance.name
         instance.name = validated_data.get("name", instance.name)
         instance.position = validated_data.get("position", instance.position)
-        instance.age = validated_data.get("age", instance.age)
         instance.save()
 
-        existing_skills = [i.skill for i in instance.playerSkills]
+        existing_skills = [i.skill for i in instance.playerSkills.all()]
         for playerSkill in playerSkills:
-            if playerSkill["skill"] in existing_skills: # we are updating the skill
-                var = PlayerSkill.objects.get(skill=playerSkill["skill"], playerID=instance)
+            if playerSkill["skill"] in existing_skills:  # we are updating the skill
+                var = PlayerSkill.objects.get(skill=playerSkill["skill"], player=instance)
                 var.value = playerSkill.get("value", var.value)
                 var.save()
             else:
-                PlayerSkill.objects.create(**playerSkill, playerID=instance)
+                PlayerSkill.objects.create(**playerSkill, player=instance)
+
         return instance

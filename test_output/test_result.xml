@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-	<testsuite name="my_app.tests.test_create_player.CreatePlayerTestCase-20240116005423" tests="1" file="my_app/tests/test_create_player.py" time="0.005" timestamp="2024-01-16T00:54:23" failures="0" errors="0" skipped="0">
-		<testcase classname="my_app.tests.test_create_player.CreatePlayerTestCase" name="test_sample" time="0.005" timestamp="2024-01-16T00:54:23" file="my_app\tests\test_create_player.py" line="21"/>
+	<testsuite name="my_app.tests.test_create_player.CreatePlayerTestCase-20240116032047" tests="1" file="my_app/tests/test_create_player.py" time="0.005" timestamp="2024-01-16T03:20:47" failures="0" errors="0" skipped="0">
+		<testcase classname="my_app.tests.test_create_player.CreatePlayerTestCase" name="test_sample" time="0.005" timestamp="2024-01-16T03:20:47" file="my_app\tests\test_create_player.py" line="21"/>
 	</testsuite>
-	<testsuite name="my_app.tests.test_delete_player.DeletePlayerTestCase-20240116005423" tests="1" file="my_app/tests/test_delete_player.py" time="0.022" timestamp="2024-01-16T00:54:23" failures="0" errors="0" skipped="0">
-		<testcase classname="my_app.tests.test_delete_player.DeletePlayerTestCase" name="test_sample" time="0.022" timestamp="2024-01-16T00:54:23" file="my_app\tests\test_delete_player.py" line="21"/>
+	<testsuite name="my_app.tests.test_delete_player.DeletePlayerTestCase-20240116032047" tests="1" file="my_app/tests/test_delete_player.py" time="0.021" timestamp="2024-01-16T03:20:47" failures="0" errors="0" skipped="0">
+		<testcase classname="my_app.tests.test_delete_player.DeletePlayerTestCase" name="test_sample" time="0.021" timestamp="2024-01-16T03:20:47" file="my_app\tests\test_delete_player.py" line="21"/>
 	</testsuite>
-	<testsuite name="my_app.tests.test_list_player.ListPlayerTestCase-20240116005423" tests="1" file="my_app/tests/test_list_player.py" time="0.010" timestamp="2024-01-16T00:54:23" failures="0" errors="0" skipped="0">
-		<testcase classname="my_app.tests.test_list_player.ListPlayerTestCase" name="test_sample" time="0.010" timestamp="2024-01-16T00:54:23" file="my_app\tests\test_list_player.py" line="21"/>
+	<testsuite name="my_app.tests.test_list_player.ListPlayerTestCase-20240116032047" tests="1" file="my_app/tests/test_list_player.py" time="0.012" timestamp="2024-01-16T03:20:47" failures="0" errors="0" skipped="0">
+		<testcase classname="my_app.tests.test_list_player.ListPlayerTestCase" name="test_sample" time="0.012" timestamp="2024-01-16T03:20:47" file="my_app\tests\test_list_player.py" line="21"/>
 	</testsuite>
-	<testsuite name="my_app.tests.test_process_team.ProcessTeamTestCase-20240116005423" tests="1" file="my_app/tests/test_process_team.py" time="0.011" timestamp="2024-01-16T00:54:23" failures="0" errors="0" skipped="0">
-		<testcase classname="my_app.tests.test_process_team.ProcessTeamTestCase" name="test_sample" time="0.011" timestamp="2024-01-16T00:54:23" file="my_app\tests\test_process_team.py" line="21"/>
+	<testsuite name="my_app.tests.test_process_team.ProcessTeamTestCase-20240116032047" tests="1" file="my_app/tests/test_process_team.py" time="0.013" timestamp="2024-01-16T03:20:47" failures="0" errors="0" skipped="0">
+		<testcase classname="my_app.tests.test_process_team.ProcessTeamTestCase" name="test_sample" time="0.013" timestamp="2024-01-16T03:20:47" file="my_app\tests\test_process_team.py" line="21"/>
 	</testsuite>
-	<testsuite name="my_app.tests.test_update_player.UpdatePlayerTestCase-20240116005423" tests="1" file="my_app/tests/test_update_player.py" time="0.013" timestamp="2024-01-16T00:54:23" failures="0" errors="0" skipped="0">
-		<testcase classname="my_app.tests.test_update_player.UpdatePlayerTestCase" name="test_sample" time="0.013" timestamp="2024-01-16T00:54:23" file="my_app\tests\test_update_player.py" line="21"/>
+	<testsuite name="my_app.tests.test_update_player.UpdatePlayerTestCase-20240116032047" tests="1" file="my_app/tests/test_update_player.py" time="0.013" timestamp="2024-01-16T03:20:47" failures="0" errors="0" skipped="0">
+		<testcase classname="my_app.tests.test_update_player.UpdatePlayerTestCase" name="test_sample" time="0.013" timestamp="2024-01-16T03:20:47" file="my_app\tests\test_update_player.py" line="21"/>
 	</testsuite>
 </testsuites>

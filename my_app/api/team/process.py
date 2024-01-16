@@ -13,7 +13,6 @@ from my_app.models.player import Player
 from my_app.serializers.player import PlayerSerializer
 
 # Personal Reasons :)
-from collections import OrderedDict
 from rest_framework.utils.serializer_helpers import ReturnList
 
 position_list = ["defender", "midfielder", "forward"]
@@ -38,7 +37,6 @@ def Listthem():
     for i in range(0, len(input)):
         output.append({})
         output[i]["name"] = input[i]["name"]
-        output[i]["age"] = input[i]["age"]
         output[i]["position"] = input[i]["position"]
         output[i]["playerSkills"] = []
 
@@ -108,36 +106,27 @@ def positionMax2(thelist, pos):
                 position.append(pos[a])
     return position
 
+def valid(validated_data):
+
+    if validated_data.get("position", None) is None:  # no position
+        return message("Invalid value for position: None")
+    if validated_data.get("mainSkill", None) is None:  # no skills
+        return message("Invalid value for mainSkill: None")
+    if validated_data.get("numberOfPlayers", None) is None:  # no name
+        return message("Invalid value for numberOfPlayers: None")
+
+    return ""
+
 response = ""
 
 def team_process_handler(request: Request):
     # We are checking the data if it is valid
     global response, position_list
-    if (type(request.data) == dict):
-        if not(request.data["position"] in position_list):
-            response = message("Invalid value for position: " + request.data["position"])
-            return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
 
-        if not((request.data["mainSkill"] in skills_list)):
-            response = message("Invalid value for skill: " + request.data["mainSkill"])
-            return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
-
-        if not((str(request.data["numberOfPlayers"]).isnumeric())):
-            response = message("Invalid value for numberOfPlayers: " + request.data["numberOfPlayers"])
-            return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
-    else:
-        for i in request.data:
-            if not ((i["position"] in position_list)):
-                response = message("Invalid value for position: " + i["position"])
-                return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
-
-            if not ((i["mainSkill"] in skills_list)):
-                response = message("Invalid value for skill: " + i["mainSkill"])
-                return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
-
-            if not ((str(i["numberOfPlayers"]).isnumeric())):
-                response = message("Invalid value for numberOfPlayers: " + i["numberOfPlayers"])
-                return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
+    # If it is empty just stop the whole thing
+    if request.data == {}:
+        response = message("Invalid Data")
+        return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
 
     # iterate through all the requirements in data
     # We first copy all the players and skills
@@ -152,6 +141,50 @@ def team_process_handler(request: Request):
         data.append(request.data)
 
     for a in data:
+        response = ""
+
+        # Check is data valid
+        validity = ""
+        validity = valid(a)
+        if not (validity == ""):
+            response = validity
+
+        if not(response == ""):
+            final_players.append(response)
+            if a == data[len(data) - 1]:  # If it is the last item
+                if len(final_players) == 1:
+                    final_players = final_players[0]
+                response = final_players
+                return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
+            else:
+                continue
+
+        # Checking for any empty values or wrong data
+        if not (a["position"] in position_list):
+            if a["position"] == "":
+                response = message("Invalid value for position: Empty")
+            else:
+                response = message("Invalid value for position: " + a["position"])
+        elif not (a["mainSkill"] in skills_list):
+            if a["mainSkill"] == "":
+                response = message("Invalid value for mainSkill: Empty")
+            else:
+                response = message("Invalid value for mainSkill: " + a["mainSkill"])
+        elif a["numberOfPlayers"] == "":
+            response = message("Invalid value for numberOfPlayers: Empty")
+        elif not (str(a["numberOfPlayers"]).isnumeric()):
+            response = message("Invalid value for numberOfPlayers: " + a["numberOfPlayers"])
+
+        if not(response == ""):
+            final_players.append(response)
+            if a == data[len(data) - 1]:  # If it is the last item
+                if len(final_players) == 1:
+                    final_players = final_players[0]
+                response = final_players
+                return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
+            else:
+                continue
+
         # counting the number of defenders, midfielders, forwards
         defenders = count("defender")
         midfielders = count("midfielder")
@@ -171,7 +204,6 @@ def team_process_handler(request: Request):
                         final_players = final_players[0]
                     response = final_players
                     return JsonResponse(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
-
                 else:
                     continue
             else:
